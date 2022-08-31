@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "fragments/header.html" at runtime.                                     -->
+    <!-- ============================================================================ -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Static header</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding-top: 15px; justify-content: center; max-width: 900px">
+    <h2 th:text="#{sales.cont.records.header}"></h2>
+    <form>
+        <div class="form-group" style="padding-top: 15px; max-width: 450px;">
+            <label>Quarter</label>
+            <input th:name="quarter" type="text" class="form-control" style="max-width: 225px;"
+                   aria-describedby="emailHelp" placeholder="YYYY-QQ">
+            <small id="quarterHelp" class="form-text text-muted" th:text="#{sales.form.help.quarter}"></small>
+        </div>
+        <div class="form-group" style="padding-top: 15px; max-width: 450px;">
+            <label>Country</label>
+            <select th:name="country">
+                <option></option>
+                <option>CZ</option>
+                <option>SK</option>
+            </select>
+            <small id="countryHelp" class="form-text text-muted" th:text="#{sales.form.help.country}"></small>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" value="submit"/>
+        </div>
+    </form>
+</div>
+<div class="container" style="padding-top: 15px; justify-content: center; max-width: 870px">
+    <div class="row">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">COUNTRY</th>
+                    <th scope="col">VENDOR</th>
+                    <th scope="col">QUARTER</th>
+                    <th scope="col">UNITS</th>
+                    <th scope="col">MARKET SHARE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sale: ${sales}">
+                    <td th:text="${sale.country}"></td>
+                    <td th:text="${sale.vendor}"></td>
+                    <td th:text="${sale.quarter}"></td>
+                    <td th:text="${sale.units}"></td>
+                    <td th:text="${sale.marketSharePerQuarter} + ' %'"></td>
+                </tr>
+                <tr>
+                    <td>TOTAL</td>
+                    <td></td>
+                    <td></td>
+                    <td th:text="${total_sales}"></td>
+                    <td>100%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+<body>
+    <div th:replace="fragments/navbar :: navbar">
+        <!-- ============================================================================ -->
+        <!-- This content is only used for static prototyping purposes (natural templates)-->
+        <!-- and is therefore entirely optional, as this markup fragment will be included -->
+        <!-- from "fragments/header.html" at runtime.                                     -->
+        <!-- ============================================================================ -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Static header</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="header" style="display: flex; max-width: 900px; margin-top: 50px;">
+        <h2 th:text="#{index.cont.records.header}"></h2>
+    </div>
+    <div class="container" id="records" style="display: flex; padding-top: 15px; justify-content: center; max-width: 900px">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">COUNTRY</th>
+                    <th scope="col">TIMESCALE</th>
+                    <th scope="col">VENDOR</th>
+                    <th scope="col">UNITS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sale: ${sales}">
+                    <td th:text="${sale.country}"></td>
+                    <td th:text="${sale.vendor}"></td>
+                    <td th:text="${sale.quarter}"></td>
+                    <td th:text="${sale.units}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
